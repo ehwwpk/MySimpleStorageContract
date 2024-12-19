@@ -1,0 +1,38 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.18; // solidity versions
+
+contract SimpleStorage {
+    // favoriteNumber gets initialized to 0 if no value
+    uint256 myFavoriteNumber; // 0
+        
+    // uint256 favoriteNumbers; // [0, 16, 42]
+    struct Person {
+        uint256 favoriteNumber;
+        string name;
+    }
+
+    // dynamic array
+
+    // static array
+    Person[] public listOfPeople; //deafulted to empty list = []
+
+    mapping(string => uint256) public nameToFavoriteNumber;
+
+    // human -> 232
+    function store(uint256 _favoriteNumber) public {
+        myFavoriteNumber = _favoriteNumber;
+    }
+
+    //view, pure
+    function retrieve() view public returns (uint256){
+        return myFavoriteNumber;
+        
+    }
+
+    // calldata, memory, storage
+    function addPerson(string memory _name, uint256 _favoriteNumber) public{
+        listOfPeople.push( Person(_favoriteNumber, _name) );
+        nameToFavoriteNumber[_name] = _favoriteNumber;
+    }
+
+}
